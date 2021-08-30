@@ -32,8 +32,6 @@ class CaffeineDB {
         var stmt: OpaquePointer?
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing select: \(errmsg)")
             return 0
         }
         
@@ -60,37 +58,26 @@ class CaffeineDB {
         let queryString = "INSERT INTO caffeine (date, mg, name, memo) VALUES (?,?,?,?)"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 1, today, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 2, mg, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding mg: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 3, name, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding name: \(errmsg)")
+
             return
         }
         if sqlite3_bind_text(stmt, 4, memo, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding memo: \(errmsg)")
             return
         }
         
-        if sqlite3_step(stmt) != SQLITE_DONE { // 잘 끝나지 않았으면
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure inserting caffeine: \(errmsg)")
+        if sqlite3_step(stmt) != SQLITE_DONE {
             return
         }
         sqlite3_finalize(stmt)
@@ -106,41 +93,27 @@ class CaffeineDB {
         let queryString = "INSERT INTO caffeine (date, mg, name, memo) VALUES (?,?,?,?)"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 1, todayDate, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 2, "150", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding mg: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 3, "Espresso 2shot", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding name: \(errmsg)")
             return
         }
         if sqlite3_bind_text(stmt, 4, "", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding memo: \(errmsg)")
             return
         }
         
-        if sqlite3_step(stmt) != SQLITE_DONE {      // 잘 끝나지 않았으면
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure inserting caffeine: \(errmsg)")
+        if sqlite3_step(stmt) != SQLITE_DONE {
             return
         }
-        
-        print("Caffeine TwoShoot saved successfully")
         
         sqlite3_finalize(stmt)
     }
@@ -153,41 +126,29 @@ class CaffeineDB {
         let queryString = "INSERT INTO caffeine (date, mg, name, memo) VALUES (?,?,?,?)"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 1, todayDate, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 2, "225", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding mg: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 3, "Espresso 3shot", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding name: \(errmsg)")
             return
         }
         if sqlite3_bind_text(stmt, 4, "", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding memo: \(errmsg)")
             return
         }
         
         if sqlite3_step(stmt) != SQLITE_DONE {      // 잘 끝나지 않았으면
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure inserting caffeine: \(errmsg)")
+
             return
         }
         
-        print("Caffeine ThreeShoot saved successfully")
         sqlite3_finalize(stmt)
     }
     
@@ -199,41 +160,28 @@ class CaffeineDB {
         let queryString = "INSERT INTO caffeine (date, mg, name, memo) VALUES (?,?,?,?)"
         
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 1, todayDate, -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 2, "70", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding mg: \(errmsg)")
             return
         }
         
         if sqlite3_bind_text(stmt, 3, "믹스커피", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding name: \(errmsg)")
             return
         }
         if sqlite3_bind_text(stmt, 4, "", -1, SQLITE_TRANSIENT) != SQLITE_OK {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding memo: \(errmsg)")
             return
         }
         
-        if sqlite3_step(stmt) != SQLITE_DONE {// 잘 끝나지 않았으면
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure inserting caffeine: \(errmsg)")
+        if sqlite3_step(stmt) != SQLITE_DONE {
             return
         }
         
-        print("Caffeine OneShoot saved successfully")
         sqlite3_finalize(stmt)
     }
 }
