@@ -7,6 +7,8 @@
 
 import UIKit
 
+var cnt = 0
+
 class MyInfoViewController: UIViewController {
     
     // UI
@@ -24,9 +26,17 @@ class MyInfoViewController: UIViewController {
         // btnCompletion UI Setting
         btnCompletion.layer.cornerRadius = 8
         
+        // Alert
+        if cnt == 0 {
+            infoAlert()
+        }
+    
+        // User delegate
         tfName.delegate = self
         tfAge.delegate = self
         tfWeight.delegate = self
+        
+        
 
     } // ---------- viewDidLoad
     
@@ -99,7 +109,7 @@ class MyInfoViewController: UIViewController {
     } // --------touchesBegan
     
  
-    // Toast Message Fuction
+    // Empty Check_Toast Message Fuction
     func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: (self.view.frame.size.height/10)*2, width: 150, height: 35))
         toastLabel.backgroundColor = UIColor(red: 0.4667, green: 0.3373, blue: 0.0784, alpha: 1.0) // c60
@@ -117,6 +127,47 @@ class MyInfoViewController: UIViewController {
             toastLabel.removeFromSuperview()
         })
     }
+    
+    // Information Fuction
+    func infoAlert() {
+        cnt += 1
+        
+        let infoMessage = UIAlertController(title: "안내", message: "1일 카페인 권장량을 확인하기 위해\n다음과 같은 정보가 필요합니다.\n(본 앱은 사용자 정보를 수집하지 않습니다.)", preferredStyle: .alert)
+        
+        // AlertAction
+        let actionNext = UIAlertAction(title: "건너뛰기", style: .default, handler: { Action in
+            self.infoNextAlert()
+        })
+        let actionOK = UIAlertAction(title: "확인", style: .default, handler: nil)
+        
+        infoMessage.addAction(actionNext)
+        infoMessage.addAction(actionOK)
+        
+        present(infoMessage, animated: true, completion: nil)
+        
+    }
+    
+    // infoNext Fuction
+    func infoNextAlert() {
+        let infoNext = UIAlertController(title: "건너뛰기", message: "기본 정보로 등록됩니다.\n이후 마이페이지에서 수정 가능합니다.", preferredStyle: .alert)
+        
+        // AlertAction
+        let actionOK = UIAlertAction(title: "확인", style: .default, handler: {Action in
+            
+            self.myUserDefaults.set("사용자", forKey: "userName")
+            self.myUserDefaults.set("20", forKey: "userAge")
+            self.myUserDefaults.set("0", forKey: "userWeight")
+            self.myUserDefaults.set(false, forKey: "userPregnancy")
+
+            // Now Screen Disappear
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        infoNext.addAction(actionOK)
+        
+        present(infoNext, animated: true, completion: nil)
+    }
+
 
 
     /*
