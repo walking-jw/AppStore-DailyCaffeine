@@ -110,8 +110,6 @@ class HomeViewController: UIViewController {
     // img change - myPercent
     func coffeeImg(_ myPercent: Double) {
         
-        print(myPercent)
-        
         if myPercent > 80.0 {
             imgCoffee.image = UIImage(named: "10.png")
         }else if myPercent > 60.0 {

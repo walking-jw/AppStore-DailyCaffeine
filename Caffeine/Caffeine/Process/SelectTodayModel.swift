@@ -33,13 +33,9 @@ class SelectTodayModel {
         let query = "SELECT * FROM caffeine WHERE date = ?"
         
         if sqlite3_prepare(db, query, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error pareparing select: \(errmsg)")
             return userCaffeine
         }
         if sqlite3_bind_text(stmt, 1, selectedDate, -1, SQLITE_TRANSIENT) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return userCaffeine
         }
         

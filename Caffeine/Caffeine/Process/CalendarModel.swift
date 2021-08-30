@@ -35,8 +35,6 @@ class CalendarModel{
         //let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self) // 한글 깨짐 방지 ****
         
         if sqlite3_prepare(db, query, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error pareparing select: \(errmsg)")
             return caffeineList
         }
         
@@ -66,13 +64,9 @@ class CalendarModel{
         let query = "SELECT * FROM caffeine WHERE date = ?"
         
         if sqlite3_prepare(db, query, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error pareparing select: \(errmsg)")
             return caffeineList
         }
         if sqlite3_bind_text(stmt, 1, selectedDate, -1, SQLITE_TRANSIENT) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error binding date: \(errmsg)")
             return caffeineList
         }
         
